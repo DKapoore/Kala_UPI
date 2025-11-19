@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kala Residency Payment</title>
+<title>Kala Residency Payment System</title>
+
 <style>
 * {
   box-sizing: border-box;
@@ -13,363 +14,240 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background: linear-gradient(135deg, #f0f2f5 0%, #e6e9f0 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #333;
-  line-height: 1.6;
-  padding: 10px;
+  padding: 20px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   min-height: 100vh;
 }
 
 .container {
   width: 100%;
-  max-width: 480px;
+  max-width: 500px;
   background: #ffffff;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
+/* Header */
 .header {
   text-align: center;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 h2 {
-  color: #1a73e8;
-  font-size: 1.5rem;
-  margin-bottom: 4px;
+  color: #1a1a1a;
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+  font-weight: 700;
 }
 
 .subtitle {
-  color: #5f6368;
-  font-size: 0.9rem;
+  color: #666;
+  font-size: 0.95rem;
 }
 
+/* Success Message */
+.success-message {
+  display: none;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+}
+
+/* Form Inputs */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 label {
-  display: block;
   font-weight: 600;
-  margin-bottom: 8px;
-  color: #3c4043;
+  margin-bottom: 10px;
+  display: block;
+  color: #333;
   font-size: 0.95rem;
 }
 
 input, select {
   width: 100%;
-  padding: 14px 16px;
+  padding: 16px;
   font-size: 16px;
-  border: 1.5px solid #dadce0;
-  border-radius: 8px;
-  background-color: #fff;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: #fafafa;
 }
 
 input:focus, select:focus {
   outline: none;
-  border-color: #1a73e8;
-  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
-}
-
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.form-row .form-group {
-  flex: 1 1 calc(50% - 15px);
-  margin-bottom: 0;
-}
-
-.amount-group {
-  position: relative;
-}
-
-.amount-group::before {
-  content: "₹";
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #5f6368;
-  z-index: 1;
-}
-
-#amount {
-  padding-left: 32px;
-}
-
-.button-group {
-  margin-top: 30px;
-  display: flex;
-  gap: 10px;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 button {
-  flex: 1;
-  padding: 16px;
-  font-size: 1rem;
-  font-weight: 600;
+  width: 100%;
+  padding: 18px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.primary-btn {
-  background: #1a73e8;
-  color: white;
-  box-shadow: 0 2px 4px rgba(26, 115, 232, 0.3);
-}
-
-.secondary-btn {
-  background: #f1f3f4;
-  color: #5f6368;
-  border: 1px solid #dadce0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
 }
 
-button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+button:active {
+  transform: translateY(0);
 }
 
-.payment-info {
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-top: 20px;
-  font-size: 0.85rem;
-  color: #5f6368;
+/* QR Section */
+#qrSection {
+  display: none;
+  margin-top: 32px;
   text-align: center;
-  border: 1px dashed #dadce0;
 }
 
-.payment-info strong {
-  color: #1a73e8;
+.qr-container {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
+.qr-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+#qrImage {
+  width: 260px;
+  height: 260px;
+  margin: auto;
+  display: block;
+  border-radius: 16px;
+  border: 4px solid white;
+  padding: 12px;
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Details Box */
+.qr-details-box {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  margin-top: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.detail-value {
+  font-weight: 700;
+  color: #667eea;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.btn-download {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.btn-capture {
+  background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+}
+
+/* Warning Box */
+.note-box {
+  margin-top: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff8e6 0%, #ffe8cc 100%);
+  border-left: 6px solid #ff9800;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.note-box b {
+  color: #e65100;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Responsive */
 @media (max-width: 480px) {
-  .form-row .form-group {
-    flex: 1 1 100%;
-  }
-  
   .container {
-    padding: 16px;
+    padding: 24px;
   }
   
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
   
-  .button-group {
-    flex-direction: column;
+  #qrImage {
+    width: 220px;
+    height: 220px;
   }
-}
-
-.success-message {
-  display: none;
-  background-color: #e6f4ea;
-  color: #137333;
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  text-align: center;
-  font-weight: 500;
-}
-
-.error-message {
-  display: none;
-  background-color: #fce8e6;
-  color: #c5221f;
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  text-align: center;
-  font-weight: 500;
-}
-
-.loading {
-  display: none;
-  text-align: center;
-  margin: 10px 0;
-}
-
-.loading-spinner {
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #1a73e8;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.upi-details {
-  background: #f0f7ff;
-  border-radius: 8px;
-  padding: 15px;
-  margin-top: 15px;
-  border-left: 4px solid #1a73e8;
-}
-
-.upi-details h3 {
-  color: #1a73e8;
-  font-size: 1rem;
-  margin-bottom: 8px;
-}
-
-.upi-details p {
-  margin: 5px 0;
-  font-size: 0.9rem;
-  color: #5f6368;
-}
-
-.payment-apps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 15px 0;
-}
-
-.payment-app {
-  text-align: center;
-  padding: 15px 10px;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: white;
-}
-
-.payment-app.active {
-  border-color: #1a73e8;
-  background: #f0f7ff;
-  transform: scale(1.05);
-}
-
-.payment-app:hover {
-  border-color: #1a73e8;
-}
-
-.payment-app img {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 8px;
-  border-radius: 8px;
-}
-
-.payment-app-name {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #3c4043;
-}
-
-.mobile-input-group {
-  position: relative;
-}
-
-.mobile-input-group::before {
-  content: "+91";
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #5f6368;
-  z-index: 1;
-}
-
-#mobile {
-  padding-left: 50px;
-}
-
-.instruction-box {
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
-  border-radius: 8px;
-  padding: 15px;
-  margin: 15px 0;
-  text-align: center;
-}
-
-.instruction-box h4 {
-  color: #856404;
-  margin-bottom: 8px;
-}
-
-.instruction-steps {
-  text-align: left;
-  font-size: 0.85rem;
-  color: #856404;
-}
-
-.instruction-steps li {
-  margin-bottom: 5px;
-}
-
-.popup-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup-content {
-  background: white;
-  padding: 25px;
-  border-radius: 16px;
-  text-align: center;
-  max-width: 350px;
-  width: 90%;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.popup-content h3 {
-  color: #1a73e8;
-  margin-bottom: 15px;
-}
-
-.popup-content p {
-  margin-bottom: 20px;
-  color: #5f6368;
-}
-
-.popup-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.popup-buttons button {
-  flex: 1;
 }
 </style>
 </head>
@@ -377,296 +255,332 @@ button:disabled {
 <body>
 
 <div class="container">
+
   <div class="header">
-    <h2>Kala Residency Payment</h2>
-    <p class="subtitle">Secure payment for maintenance and other charges</p>
+    <div class="logo-circle">KR</div>
+    <h2>Kala Residency</h2>
+    <p class="subtitle">Secure & Verified Online Payment System</p>
   </div>
 
-  <div class="success-message" id="successMessage">
-    Payment request sent successfully! Please check your payment app.
+  <div id="successMessage" class="success-message">
+    ✓ Payment details saved! QR Code generated successfully.
   </div>
 
-  <div class="error-message" id="errorMessage">
-    Payment request failed! Please try again.
-  </div>
-
-  <div class="loading" id="loadingIndicator">
-    <div class="loading-spinner"></div>
-    <p>Sending payment request...</p>
-  </div>
-
+  <!-- FORM -->
   <form id="payForm">
-    <div class="form-row">
-      <div class="form-group">
-        <label for="flat">Flat No</label>
-        <select id="flat" required>
-          <option value="">Select</option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label for="type">Owner / Tenant</label>
-        <select id="type" required>
-          <option value="Owner">Owner</option>
-          <option value="Tenant">Tenant</option>
-        </select>
-      </div>
-    </div>
-
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" required placeholder="Enter your full name">
-    </div>
-
-    <div class="form-group mobile-input-group">
-      <label for="mobile">Mobile Number</label>
-      <input type="tel" id="mobile" required placeholder="Enter your mobile number" pattern="[0-9]{10}" maxlength="10">
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="month">Month</label>
-        <input type="month" id="month" required>
-      </div>
-      
-      <div class="form-group amount-group">
-        <label for="amount">Amount (₹)</label>
-        <input type="number" id="amount" required placeholder="0.00" min="1">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="purpose">Purpose</label>
-      <select id="purpose" required>
-        <option value="Maintenance">Maintenance</option>
-        <option value="Water Charges">Water Charges</option>
-        <option value="Parking">Parking</option>
-        <option value="Sinking Fund">Sinking Fund</option>
-        <option value="Other">Other</option>
+      <label>Flat/Shop Number</label>
+      <select id="flat" required>
+        <option value="">Select your flat/shop</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="remark">Remark (Optional)</label>
-      <input type="text" id="remark" placeholder="If any">
+      <label>Full Name</label>
+      <input id="userName" type="text" placeholder="Enter your name" required>
     </div>
 
     <div class="form-group">
-      <label>Select Payment App</label>
-      <div class="payment-apps">
-        <div class="payment-app" data-app="googlepay" onclick="selectPaymentApp('googlepay')">
-          <div style="width:40px;height:40px;background:linear-gradient(45deg,#4285F4,#34A853);border-radius:8px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">GP</div>
-          <div class="payment-app-name">Google Pay</div>
+      <label>Payment Month</label>
+      <input type="month" id="month" required>
+    </div>
+
+    <div class="form-group">
+      <label>Amount (₹)</label>
+      <input type="number" id="amount" min="1" placeholder="Enter amount" required>
+    </div>
+
+    <div class="form-group">
+      <label>Payment Purpose</label>
+      <select id="purpose" required>
+        <option>Maintenance</option>
+        <option>Water Charges</option>
+        <option>Parking</option>
+        <option>Sinking Fund</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <button type="submit">Generate Payment QR Code</button>
+  </form>
+
+  <!-- QR SECTION -->
+  <div id="qrSection">
+
+    <div class="qr-container">
+      
+      <h3 class="qr-title">📱 Scan to Pay via UPI</h3>
+      
+      <img id="qrImage" alt="Payment QR Code">
+
+      <!-- DETAILS -->
+      <div class="qr-details-box">
+        <div class="detail-row">
+          <div class="detail-label">Flat/Shop:</div>
+          <div class="detail-value" id="qrFlat">-</div>
         </div>
-        <div class="payment-app" data-app="phonepe" onclick="selectPaymentApp('phonepe')">
-          <div style="width:40px;height:40px;background:#5F2FEE;border-radius:8px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">PP</div>
-          <div class="payment-app-name">PhonePe</div>
+        <div class="detail-row">
+          <div class="detail-label">Name:</div>
+          <div class="detail-value" id="qrName">-</div>
         </div>
-        <div class="payment-app" data-app="paytm" onclick="selectPaymentApp('paytm')">
-          <div style="width:40px;height:40px;background:#002E6E;border-radius:8px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">PT</div>
-          <div class="payment-app-name">Paytm</div>
+        <div class="detail-row">
+          <div class="detail-label">Amount:</div>
+          <div class="detail-value" id="qrAmount">-</div>
         </div>
-        <div class="payment-app" data-app="bhim" onclick="selectPaymentApp('bhim')">
-          <div style="width:40px;height:40px;background:#1F6DFF;border-radius:8px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">BH</div>
-          <div class="payment-app-name">BHIM</div>
+        <div class="detail-row">
+          <div class="detail-label">Month:</div>
+          <div class="detail-value" id="qrMonth">-</div>
         </div>
-        <div class="payment-app" data-app="amazonpay" onclick="selectPaymentApp('amazonpay')">
-          <div style="width:40px;height:40px;background:#FF9900;border-radius:8px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">AP</div>
-          <div class="payment-app-name">Amazon Pay</div>
-        </div>
-        <div class="payment-app" data-app="whatsapp" onclick="selectPaymentApp('whatsapp')">
-          <div style="width:40px;height:40px;background:#25D366;border-radius:8px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">WA</div>
-          <div class="payment-app-name">WhatsApp Pay</div>
+        <div class="detail-row">
+          <div class="detail-label">Purpose:</div>
+          <div class="detail-value" id="qrPurpose">-</div>
         </div>
       </div>
+
     </div>
 
-    <div class="instruction-box">
-      <h4>Payment Instructions</h4>
-      <ul class="instruction-steps">
-        <li>Select your preferred payment app</li>
-        <li>Enter your mobile number</li>
-        <li>Click "Send Payment Request"</li>
-        <li>Open your payment app manually</li>
-        <li>Complete the payment in the app</li>
-      </ul>
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button id="downloadQR" class="btn-download">⬇ Download QR</button>
+      <button id="screenshotQR" class="btn-capture">📸 Capture QR</button>
     </div>
 
-    <div class="button-group">
-      <button type="submit" class="primary-btn" id="submitBtn">Send Payment Request</button>
+    <!-- Warning -->
+    <div class="note-box">
+      <b>⚠ महत्वपूर्ण सूचना / Important Note:</b>
+      <b>Hindi:</b> कृपया इस QR को केवल एक बार उपयोग करें। अगली पेमेंट के लिए नया QR बनाकर ही भुगतान करें।<br><br>
+      <b>Marathi:</b> कृपया हा QR फक्त एकदाच वापरा. पुढील पेमेंटसाठी नवीन QR तयार करूनच पेमेंट करा.<br><br>
+      <b>English:</b> Please use this QR code only once. Generate a new QR code for the next payment.
     </div>
-  </form>
-</div>
 
-<!-- Payment Success Popup -->
-<div class="popup-overlay" id="paymentPopup">
-  <div class="popup-content">
-    <h3>Payment Request Sent! ✅</h3>
-    <p>We've sent a payment request to your mobile number via <strong id="selectedAppName">Google Pay</strong>.</p>
-    <p>Please <strong>open your payment app manually</strong> to complete the payment.</p>
-    <div class="popup-buttons">
-      <button class="secondary-btn" onclick="closePopup()">Close</button>
-      <button class="primary-btn" onclick="openPaymentApp()">Open Payment App</button>
-    </div>
   </div>
 </div>
 
 <script>
-// Dynamically Insert Flat & Shop Numbers
-const flatDropdown = document.getElementById("flat");
-
-// Flats 1–21
-for (let i = 1; i <= 21; i++) {
-  flatDropdown.innerHTML += `<option value="Flat ${i}">Flat ${i}</option>`;
+// Fill Flats and Shops
+const flatSelect = document.getElementById('flat');
+for(let i = 1; i <= 21; i++) {
+  flatSelect.innerHTML += `<option>Flat ${i}</option>`;
+}
+for(let i = 1; i <= 5; i++) {
+  flatSelect.innerHTML += `<option>Shop ${i}</option>`;
 }
 
-// Shops 1–5
-for (let i = 1; i <= 5; i++) {
-  flatDropdown.innerHTML += `<option value="Shop ${i}">Shop ${i}</option>`;
-}
+// Set current month
+document.getElementById('month').value = new Date().toISOString().slice(0, 7);
 
-// Set current month as default
-const currentDate = new Date();
-const currentMonth = currentDate.toISOString().slice(0, 7);
-document.getElementById("month").value = currentMonth;
-
-let selectedPaymentApp = 'googlepay';
-
-// Payment App Selection
-function selectPaymentApp(app) {
-  selectedPaymentApp = app;
-  
-  // Remove active class from all apps
-  document.querySelectorAll('.payment-app').forEach(el => {
-    el.classList.remove('active');
-  });
-  
-  // Add active class to selected app
-  document.querySelector(`[data-app="${app}"]`).classList.add('active');
-  
-  // Update app name in popup
-  const appNames = {
-    'googlepay': 'Google Pay',
-    'phonepe': 'PhonePe',
-    'paytm': 'Paytm',
-    'bhim': 'BHIM',
-    'amazonpay': 'Amazon Pay',
-    'whatsapp': 'WhatsApp Pay'
-  };
-  
-  document.getElementById('selectedAppName').textContent = appNames[app];
-}
-
-// Show popup function
-function showPopup() {
-  document.getElementById('paymentPopup').style.display = 'flex';
-}
-
-// Close popup function
-function closePopup() {
-  document.getElementById('paymentPopup').style.display = 'none';
-}
-
-// Open payment app function
-function openPaymentApp() {
-  const appUrls = {
-    'googlepay': 'tez://upi/pay',
-    'phonepe': 'phonepe://upi/pay',
-    'paytm': 'paytmmp://upi/pay',
-    'bhim': 'bhim://upi/pay',
-    'amazonpay': 'amazonpay://upi/pay',
-    'whatsapp': 'whatsapp://upi/pay'
-  };
-  
-  const url = appUrls[selectedPaymentApp];
-  if (url) {
-    window.location.href = url;
-  }
-  closePopup();
-}
-
-// FORM SUBMIT HANDLER with Payment Request
-document.getElementById("payForm").addEventListener("submit", async function(e) {
+// SUBMIT HANDLER
+document.getElementById('payForm').addEventListener("submit", async(e) => {
   e.preventDefault();
 
-  // Show loading indicator
-  document.getElementById('loadingIndicator').style.display = 'block';
-  document.getElementById('successMessage').style.display = 'none';
-  document.getElementById('errorMessage').style.display = 'none';
-  
-  // Show loading/processing state
-  const submitBtn = document.querySelector('button[type="submit"]');
-  const originalText = submitBtn.textContent;
-  submitBtn.textContent = "Sending Request...";
-  submitBtn.disabled = true;
-
   const data = {
-    flat: document.getElementById("flat").value,
-    type: document.getElementById("type").value,
-    name: document.getElementById("name").value,
-    mobile: document.getElementById("mobile").value,
-    month: document.getElementById("month").value,
-    amount: document.getElementById("amount").value,
-    purpose: document.getElementById("purpose").value,
-    remark: document.getElementById("remark").value || "",
-    paymentApp: selectedPaymentApp
+    flat: document.getElementById('flat').value,
+    name: document.getElementById('userName').value,
+    month: document.getElementById('month').value,
+    amount: document.getElementById('amount').value,
+    purpose: document.getElementById('purpose').value
   };
 
+  // Update QR details
+  document.getElementById('qrFlat').textContent = data.flat;
+  document.getElementById('qrName').textContent = data.name;
+  document.getElementById('qrAmount').textContent = "₹" + data.amount;
+  document.getElementById('qrPurpose').textContent = data.purpose;
+  document.getElementById('qrMonth').textContent = data.month;
+
+  // Save to Google Sheets
   try {
-    // Save to Google Sheet  
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbwhPuy5qmFWA4nc_m6D5sgsfBmXavpGvdVEOW5jBoyAWdskiIQ9tKDnQaIh79CWl5B8/exec",
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        mode: "no-cors"
-      }
-    );
-
-    // Hide loading indicator
-    document.getElementById('loadingIndicator').style.display = 'none';
-    
-    // Show success message
-    document.getElementById("successMessage").style.display = 'block';
-    
-    // Simulate sending payment request to mobile number
-    setTimeout(() => {
-      // In real implementation, this would call your backend API
-      // to send payment request to the mobile number via the selected app
-      
-      // Show popup with instructions
-      showPopup();
-      
-      submitBtn.textContent = originalText;
-      submitBtn.disabled = false;
-    }, 2000);
-    
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    // Hide loading indicator
-    document.getElementById('loadingIndicator').style.display = 'none';
-    document.getElementById('errorMessage').style.display = 'block';
-    submitBtn.textContent = originalText;
-    submitBtn.disabled = false;
+    await fetch("https://script.google.com/macros/s/AKfycbwhPuy5qmFWA4nc_m6D5sgsfBmXavpGvdVEOW5jBoyAWdskiIQ9tKDnQaIh79CWl5B8/exec", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+  } catch(e) {
+    console.log("Data save error:", e);
   }
-});
 
-// Mobile number validation
-document.getElementById('mobile').addEventListener('input', function(e) {
-  const mobile = e.target.value;
-  if (mobile.length === 10 && /^[6-9]\d{9}$/.test(mobile)) {
-    e.target.style.borderColor = '#34a853';
-  } else if (mobile.length > 0) {
-    e.target.style.borderColor = '#ea4335';
-  } else {
-    e.target.style.borderColor = '#dadce0';
+  // Show success message
+  document.getElementById('successMessage').style.display = "block";
+
+  // Generate UPI link
+  const note = `${data.flat} - ${data.name} - ${data.month} - ${data.purpose}`;
+  const upi = `upi://pay?pa=9766893279@kotak811&pn=DEVENDRA%20KAPOORE&am=${data.amount}&cu=INR&tn=${encodeURIComponent(note)}`;
+
+  // Display QR
+  document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(upi)}`;
+  
+  // Show QR section
+  document.getElementById('qrSection').style.display = "block";
+  
+  // Scroll to QR
+  document.getElementById('qrSection').scrollIntoView({ behavior: 'smooth' });
+
+  // ENHANCED FRAMED QR GENERATOR with Two-Column Payment Details
+  async function generateFramedQR() {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = 800;
+    canvas.height = 1200;
+
+    // Background
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, 800, 1200);
+
+    // Header gradient
+    const gradient = ctx.createLinearGradient(0, 0, 800, 0);
+    gradient.addColorStop(0, '#667eea');
+    gradient.addColorStop(1, '#764ba2');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 800, 160);
+
+    // Title without logo
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 36px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Kala Residency", 400, 100);
+    ctx.font = "18px Arial";
+    ctx.fillText("Secure & Verified Online Payment System", 400, 130);
+
+    // Load and draw QR code
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(upi)}`;
+    await new Promise(resolve => img.onload = resolve);
+
+    // QR background with enhanced styling
+    ctx.fillStyle = "#f5f7fa";
+    ctx.fillRect(150, 200, 500, 500);
+    ctx.strokeStyle = "#667eea";
+    ctx.lineWidth = 6;
+    ctx.strokeRect(150, 200, 500, 500);
+    
+    // Inner QR border
+    ctx.strokeStyle = "#764ba2";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(165, 215, 470, 470);
+
+    // Draw QR
+    ctx.drawImage(img, 190, 240, 420, 420);
+
+    // Scan instruction
+    ctx.fillStyle = "#667eea";
+    ctx.font = "bold 26px Arial";
+    ctx.fillText("📱 Scan to Pay via UPI", 400, 750);
+
+    // Enhanced Details box with TWO COLUMNS
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(80, 780, 640, 240);
+    ctx.strokeStyle = "#667eea";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(80, 780, 640, 240);
+    
+    // Inner details border
+    ctx.strokeStyle = "#e0e0e0";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(90, 790, 620, 220);
+
+    // Details title
+    ctx.fillStyle = "#333333";
+    ctx.font = "bold 24px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Payment Details", 400, 825);
+
+    // Details content in TWO COLUMNS
+    ctx.fillStyle = "#000000";
+    ctx.font = "bold 20px Arial";
+    ctx.textAlign = "left";
+    
+    // Draw lines between details
+    ctx.strokeStyle = "#f0f0f0";
+    ctx.lineWidth = 1;
+    
+    // LEFT COLUMN
+    // Flat/Shop
+    ctx.fillText(`Flat/Shop:`, 110, 870);
+    ctx.fillText(`${data.flat}`, 280, 870);
+    ctx.beginPath();
+    ctx.moveTo(110, 880);
+    ctx.lineTo(390, 880);
+    ctx.stroke();
+    
+    // Name
+    ctx.fillText(`Name:`, 110, 915);
+    ctx.fillText(`${data.name}`, 280, 915);
+    ctx.beginPath();
+    ctx.moveTo(110, 925);
+    ctx.lineTo(390, 925);
+    ctx.stroke();
+    
+    // Amount
+    ctx.fillText(`Amount:`, 110, 960);
+    ctx.fillText(`₹${data.amount}`, 280, 960);
+    ctx.beginPath();
+    ctx.moveTo(110, 970);
+    ctx.lineTo(390, 970);
+    ctx.stroke();
+    
+    // RIGHT COLUMN
+    // Purpose
+    ctx.fillText(`Purpose:`, 410, 870);
+    ctx.fillText(`${data.purpose}`, 550, 870);
+    ctx.beginPath();
+    ctx.moveTo(410, 880);
+    ctx.lineTo(690, 880);
+    ctx.stroke();
+    
+    // Month
+    ctx.fillText(`Month:`, 410, 915);
+    ctx.fillText(`${data.month}`, 550, 915);
+    ctx.beginPath();
+    ctx.moveTo(410, 925);
+    ctx.lineTo(690, 925);
+    ctx.stroke();
+    
+    // Empty row for balance
+    ctx.beginPath();
+    ctx.moveTo(410, 970);
+    ctx.lineTo(690, 970);
+    ctx.stroke();
+
+    // Enhanced Warning box
+    ctx.fillStyle = "#fff8e6";
+    ctx.fillRect(80, 1040, 640, 80);
+    ctx.strokeStyle = "#ff9800";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(80, 1040, 640, 80);
+
+    ctx.fillStyle = "#e65100";
+    ctx.font = "bold 16px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("⚠ Use this QR only once - Generate new QR for next payment", 400, 1070);
+    ctx.fillText("इस QR का उपयोग केवल एक बार करें - नई पेमेंट के लिए नया QR बनाएं", 400, 1095);
+
+    // Footer
+    ctx.fillStyle = "#999999";
+    ctx.font = "14px Arial";
+    ctx.fillText("Generated by Kala Residency Online Payment System", 400, 1130);
+
+    return canvas.toDataURL("image/jpeg", 0.95);
   }
-});
 
-// Select Google Pay by default
-setTimeout(() => {
-  selectPaymentApp('googlepay');
-}, 100);
+  // Download QR handler
+  document.getElementById('downloadQR').onclick = async() => {
+    const framedQRData = await generateFramedQR();
+    const link = document.createElement("a");
+    link.href = framedQRData;
+    link.download = `Kala_Residency_QR_${data.flat}_${data.month}.jpg`;
+    link.click();
+  };
+
+  // Screenshot QR handler (same as download for this case)
+  document.getElementById('screenshotQR').onclick = async() => {
+    const framedQRData = await generateFramedQR();
+    const link = document.createElement("a");
+    link.href = framedQRData;
+    link.download = `Kala_Residency_Receipt_${data.flat}_${data.month}.jpg`;
+    link.click();
+  };
+
+});
 </script>
 
 </body>
