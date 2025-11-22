@@ -3,7 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kala Residency Payment System</title>
+<title>Kala Residency Payment System - Secure Online Maintenance Payment</title>
+<meta name="description" content="Kala Residency's secure online payment system for maintenance, water charges, parking fees, and sinking fund payments. Generate UPI QR codes for easy payments.">
+<meta name="keywords" content="Kala Residency, maintenance payment, online payment, UPI payment, QR code payment, flat maintenance, society payment">
+<meta name="author" content="Kala Residency">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dkapoore.github.io/Kala_Pay/">
+<meta property="og:title" content="Kala Residency Payment System - Secure Online Maintenance Payment">
+<meta property="og:description" content="Kala Residency's secure online payment system for maintenance, water charges, parking fees, and sinking fund payments.">
+<meta property="og:image" content="https://i.ibb.co/bgYy3dQq/Kala-Residency.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://dkapoore.github.io/Kala_Pay/">
+<meta property="twitter:title" content="Kala Residency Payment System - Secure Online Maintenance Payment">
+<meta property="twitter:description" content="Kala Residency's secure online payment system for maintenance, water charges, parking fees, and sinking fund payments.">
+<meta property="twitter:image" content="https://i.ibb.co/bgYy3dQq/Kala-Residency.jpg">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://dkapoore.github.io/Kala_Pay/">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="https://i.ibb.co/bgYy3dQq/Kala-Residency.jpg">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Kala Residency Payment System",
+  "description": "Secure online payment system for Kala Residency maintenance and other charges",
+  "url": "https://dkapoore.github.io/Kala_Pay/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Kala Residency",
+    "url": "https://dkapoore.github.io/Kala_Pay/"
+  },
+  "areaServed": "India",
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://dkapoore.github.io/Kala_Pay/"
+  },
+  "serviceType": "Online payment system"
+}
+</script>
 
 <style>
 * {
@@ -55,7 +100,7 @@ body {
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
-h2 {
+h1 {
   color: #1a1a1a;
   font-size: 1.75rem;
   margin-bottom: 8px;
@@ -78,6 +123,18 @@ h2 {
   text-align: center;
   font-weight: 600;
   box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+}
+
+.test-mode-message {
+  display: none;
+  background: linear-gradient(135deg, #ff9a00 0%, #ffcc00 100%);
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(255, 154, 0, 0.3);
 }
 
 /* Form Inputs */
@@ -234,13 +291,28 @@ button:active {
   margin-bottom: 6px;
 }
 
+/* Test Mode Indicator */
+.test-mode-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #ff9a00 0%, #ffcc00 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(255, 154, 0, 0.3);
+  display: none;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .container {
     padding: 24px;
   }
   
-  h2 {
+  h1 {
     font-size: 1.5rem;
   }
   
@@ -254,106 +326,113 @@ button:active {
 
 <body>
 
-<div class="container">
+<div class="container" style="position: relative;">
+  <div class="test-mode-indicator" id="testModeIndicator">TEST MODE</div>
 
-  <div class="header">
-    <div class="logo-circle">KR</div>
-    <h2>Kala Residency</h2>
+  <header class="header" role="banner">
+    <div class="logo-circle" aria-label="Kala Residency Logo">KR</div>
+    <h1>Kala Residency</h1>
     <p class="subtitle">Secure & Verified Online Payment System</p>
-  </div>
+  </header>
 
-  <div id="successMessage" class="success-message">
+  <div id="successMessage" class="success-message" role="alert">
     ✓ Payment details saved! QR Code generated successfully.
   </div>
 
+  <div id="testModeMessage" class="test-mode-message" role="alert">
+    ⚠ TEST MODE: This entry is for testing only and will not be saved to the database.
+  </div>
+
   <!-- FORM -->
-  <form id="payForm">
-    <div class="form-group">
-      <label>Flat/Shop Number</label>
-      <select id="flat" required>
-        <option value="">Select your flat/shop</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Full Name</label>
-      <input id="userName" type="text" placeholder="Enter your name" required>
-    </div>
-
-    <div class="form-group">
-      <label>Payment Month</label>
-      <input type="month" id="month" required>
-    </div>
-
-    <div class="form-group">
-      <label>Amount (₹)</label>
-      <input type="number" id="amount" min="1" placeholder="Enter amount" required>
-    </div>
-
-    <div class="form-group">
-      <label>Payment Purpose</label>
-      <select id="purpose" required>
-        <option>Maintenance</option>
-        <option>Water Charges</option>
-        <option>Parking</option>
-        <option>Sinking Fund</option>
-        <option>Other</option>
-      </select>
-    </div>
-
-    <button type="submit">Generate Payment QR Code</button>
-  </form>
-
-  <!-- QR SECTION -->
-  <div id="qrSection">
-
-    <div class="qr-container">
-      
-      <h3 class="qr-title">📱 Scan to Pay via UPI</h3>
-      
-      <img id="qrImage" alt="Payment QR Code">
-
-      <!-- DETAILS -->
-      <div class="qr-details-box">
-        <div class="detail-row">
-          <div class="detail-label">Flat/Shop:</div>
-          <div class="detail-value" id="qrFlat">-</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Name:</div>
-          <div class="detail-value" id="qrName">-</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Amount:</div>
-          <div class="detail-value" id="qrAmount">-</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Month:</div>
-          <div class="detail-value" id="qrMonth">-</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Purpose:</div>
-          <div class="detail-value" id="qrPurpose">-</div>
-        </div>
+  <main role="main">
+    <form id="payForm">
+      <div class="form-group">
+        <label for="flat">Flat/Shop Number</label>
+        <select id="flat" required>
+          <option value="">Select your flat/shop</option>
+        </select>
       </div>
 
-    </div>
+      <div class="form-group">
+        <label for="userName">Full Name</label>
+        <input id="userName" type="text" placeholder="Enter your name" required>
+      </div>
 
-    <!-- Action Buttons -->
-    <div class="action-buttons">
-      <button id="downloadQR" class="btn-download">⬇ Download QR</button>
-      <button id="screenshotQR" class="btn-capture">📸 Capture QR</button>
-    </div>
+      <div class="form-group">
+        <label for="month">Payment Month</label>
+        <input type="month" id="month" required>
+      </div>
 
-    <!-- Warning -->
-    <div class="note-box">
-      <b>⚠ महत्वपूर्ण सूचना / Important Note:</b>
-      <b>Hindi:</b> कृपया इस QR को केवल एक बार उपयोग करें। अगली पेमेंट के लिए नया QR बनाकर ही भुगतान करें।<br><br>
-      <b>Marathi:</b> कृपया हा QR फक्त एकदाच वापरा. पुढील पेमेंटसाठी नवीन QR तयार करूनच पेमेंट करा.<br><br>
-      <b>English:</b> Please use this QR code only once. Generate a new QR code for the next payment.
-    </div>
+      <div class="form-group">
+        <label for="amount">Amount (₹)</label>
+        <input type="number" id="amount" min="1" placeholder="Enter amount" required>
+      </div>
 
-  </div>
+      <div class="form-group">
+        <label for="purpose">Payment Purpose</label>
+        <select id="purpose" required>
+          <option>Maintenance</option>
+          <option>Water Charges</option>
+          <option>Parking</option>
+          <option>Sinking Fund</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <button type="submit">Generate Payment QR Code</button>
+    </form>
+
+    <!-- QR SECTION -->
+    <section id="qrSection" aria-labelledby="qrTitle">
+
+      <div class="qr-container">
+        
+        <h2 id="qrTitle" class="qr-title">📱 Scan to Pay via UPI</h2>
+        
+        <img id="qrImage" alt="Payment QR Code">
+
+        <!-- DETAILS -->
+        <div class="qr-details-box">
+          <div class="detail-row">
+            <div class="detail-label">Flat/Shop:</div>
+            <div class="detail-value" id="qrFlat">-</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Name:</div>
+            <div class="detail-value" id="qrName">-</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Amount:</div>
+            <div class="detail-value" id="qrAmount">-</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Month:</div>
+            <div class="detail-value" id="qrMonth">-</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Purpose:</div>
+            <div class="detail-value" id="qrPurpose">-</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button id="downloadQR" class="btn-download">⬇ Download QR</button>
+        <button id="screenshotQR" class="btn-capture">📸 Capture QR</button>
+      </div>
+
+      <!-- Warning -->
+      <div class="note-box">
+        <b>⚠ महत्वपूर्ण सूचना / Important Note:</b>
+        <b>Hindi:</b> कृपया इस QR को केवल एक बार उपयोग करें। अगली पेमेंट के लिए नया QR बनाकर ही भुगतान करें।<br><br>
+        <b>Marathi:</b> कृपया हा QR फक्त एकदाच वापरा. पुढील पेमेंटसाठी नवीन QR तयार करूनच पेमेंट करा.<br><br>
+        <b>English:</b> Please use this QR code only once. Generate a new QR code for the next payment.
+      </div>
+
+    </section>
+  </main>
 </div>
 
 <script>
@@ -388,18 +467,31 @@ document.getElementById('payForm').addEventListener("submit", async(e) => {
   document.getElementById('qrPurpose').textContent = data.purpose;
   document.getElementById('qrMonth').textContent = data.month;
 
-  // Save to Google Sheets
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbwhPuy5qmFWA4nc_m6D5sgsfBmXavpGvdVEOW5jBoyAWdskiIQ9tKDnQaIh79CWl5B8/exec", {
-      method: "POST",
-      body: JSON.stringify(data)
-    });
-  } catch(e) {
-    console.log("Data save error:", e);
+  // Check if this is a test entry (name is "D1")
+  const isTestEntry = data.name.trim().toUpperCase() === "D1";
+  
+  // Show appropriate message
+  if (isTestEntry) {
+    document.getElementById('testModeMessage').style.display = "block";
+    document.getElementById('successMessage').style.display = "none";
+    document.getElementById('testModeIndicator').style.display = "block";
+  } else {
+    document.getElementById('successMessage').style.display = "block";
+    document.getElementById('testModeMessage').style.display = "none";
+    document.getElementById('testModeIndicator').style.display = "none";
   }
 
-  // Show success message
-  document.getElementById('successMessage').style.display = "block";
+  // Save to Google Sheets only if NOT a test entry
+  if (!isTestEntry) {
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbwhPuy5qmFWA4nc_m6D5sgsfBmXavpGvdVEOW5jBoyAWdskiIQ9tKDnQaIh79CWl5B8/exec", {
+        method: "POST",
+        body: JSON.stringify(data)
+      });
+    } catch(e) {
+      console.log("Data save error:", e);
+    }
+  }
 
   // Generate UPI link
   const note = `${data.flat} - ${data.name} - ${data.month} - ${data.purpose}`;
@@ -414,7 +506,7 @@ document.getElementById('payForm').addEventListener("submit", async(e) => {
   // Scroll to QR
   document.getElementById('qrSection').scrollIntoView({ behavior: 'smooth' });
 
-  // ENHANCED FRAMED QR GENERATOR with Two-Column Payment Details
+  // ENHANCED FRAMED QR GENERATOR (Professional Receipt Style)
   async function generateFramedQR() {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
@@ -432,13 +524,30 @@ document.getElementById('payForm').addEventListener("submit", async(e) => {
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 800, 160);
 
-    // Title without logo
+    // Logo circle
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.arc(400, 80, 55, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.fillStyle = gradient;
+    ctx.font = "bold 38px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("KR", 400, 95);
+
+    // Title
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 36px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("Kala Residency", 400, 100);
+    ctx.fillText("Kala Residency", 400, 185);
     ctx.font = "18px Arial";
-    ctx.fillText("Secure & Verified Online Payment System", 400, 130);
+    ctx.fillText("Secure & Verified Online Payment System", 400, 215);
+
+    // Add test mode indicator if applicable
+    if (isTestEntry) {
+      ctx.fillStyle = "#ff9900";
+      ctx.font = "bold 24px Arial";
+      ctx.fillText("*** TEST MODE - NOT FOR PAYMENT ***", 400, 245);
+    }
 
     // Load and draw QR code
     const img = new Image();
@@ -448,43 +557,43 @@ document.getElementById('payForm').addEventListener("submit", async(e) => {
 
     // QR background with enhanced styling
     ctx.fillStyle = "#f5f7fa";
-    ctx.fillRect(150, 200, 500, 500);
+    ctx.fillRect(150, 260, 500, 500);
     ctx.strokeStyle = "#667eea";
     ctx.lineWidth = 6;
-    ctx.strokeRect(150, 200, 500, 500);
+    ctx.strokeRect(150, 260, 500, 500);
     
     // Inner QR border
     ctx.strokeStyle = "#764ba2";
     ctx.lineWidth = 3;
-    ctx.strokeRect(165, 215, 470, 470);
+    ctx.strokeRect(165, 275, 470, 470);
 
     // Draw QR
-    ctx.drawImage(img, 190, 240, 420, 420);
+    ctx.drawImage(img, 190, 300, 420, 420);
 
     // Scan instruction
     ctx.fillStyle = "#667eea";
     ctx.font = "bold 26px Arial";
-    ctx.fillText("📱 Scan to Pay via UPI", 400, 750);
+    ctx.fillText("📱 Scan to Pay via UPI", 400, 800);
 
-    // Enhanced Details box with TWO COLUMNS
+    // Enhanced Details box
     ctx.fillStyle = "#ffffff";
-    ctx.fillRect(80, 780, 640, 240);
+    ctx.fillRect(80, 840, 640, 240);
     ctx.strokeStyle = "#667eea";
     ctx.lineWidth = 4;
-    ctx.strokeRect(80, 780, 640, 240);
+    ctx.strokeRect(80, 840, 640, 240);
     
     // Inner details border
     ctx.strokeStyle = "#e0e0e0";
     ctx.lineWidth = 2;
-    ctx.strokeRect(90, 790, 620, 220);
+    ctx.strokeRect(90, 850, 620, 220);
 
     // Details title
     ctx.fillStyle = "#333333";
     ctx.font = "bold 24px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("Payment Details", 400, 825);
+    ctx.fillText("Payment Details", 400, 885);
 
-    // Details content in TWO COLUMNS
+    // Details content with enhanced styling
     ctx.fillStyle = "#000000";
     ctx.font = "bold 20px Arial";
     ctx.textAlign = "left";
@@ -493,71 +602,54 @@ document.getElementById('payForm').addEventListener("submit", async(e) => {
     ctx.strokeStyle = "#f0f0f0";
     ctx.lineWidth = 1;
     
-    // LEFT COLUMN
-    // Flat/Shop
-    ctx.fillText(`Flat/Shop:`, 110, 870);
-    ctx.fillText(`${data.flat}`, 280, 870);
+    ctx.fillText(`Flat/Shop:`, 110, 930);
+    ctx.fillText(`${data.flat}`, 450, 930);
     ctx.beginPath();
-    ctx.moveTo(110, 880);
-    ctx.lineTo(390, 880);
+    ctx.moveTo(110, 940);
+    ctx.lineTo(690, 940);
     ctx.stroke();
     
-    // Name
-    ctx.fillText(`Name:`, 110, 915);
-    ctx.fillText(`${data.name}`, 280, 915);
+    ctx.fillText(`Name:`, 110, 975);
+    ctx.fillText(`${data.name}`, 450, 975);
     ctx.beginPath();
-    ctx.moveTo(110, 925);
-    ctx.lineTo(390, 925);
+    ctx.moveTo(110, 985);
+    ctx.lineTo(690, 985);
     ctx.stroke();
     
-    // Amount
-    ctx.fillText(`Amount:`, 110, 960);
-    ctx.fillText(`₹${data.amount}`, 280, 960);
+    ctx.fillText(`Amount:`, 110, 1020);
+    ctx.fillText(`₹${data.amount}`, 450, 1020);
     ctx.beginPath();
-    ctx.moveTo(110, 970);
-    ctx.lineTo(390, 970);
+    ctx.moveTo(110, 1030);
+    ctx.lineTo(690, 1030);
     ctx.stroke();
     
-    // RIGHT COLUMN
-    // Purpose
-    ctx.fillText(`Purpose:`, 410, 870);
-    ctx.fillText(`${data.purpose}`, 550, 870);
+    ctx.fillText(`Purpose:`, 110, 1065);
+    ctx.fillText(`${data.purpose}`, 450, 1065);
     ctx.beginPath();
-    ctx.moveTo(410, 880);
-    ctx.lineTo(690, 880);
+    ctx.moveTo(110, 1075);
+    ctx.lineTo(690, 1075);
     ctx.stroke();
     
-    // Month
-    ctx.fillText(`Month:`, 410, 915);
-    ctx.fillText(`${data.month}`, 550, 915);
-    ctx.beginPath();
-    ctx.moveTo(410, 925);
-    ctx.lineTo(690, 925);
-    ctx.stroke();
-    
-    // Empty row for balance
-    ctx.beginPath();
-    ctx.moveTo(410, 970);
-    ctx.lineTo(690, 970);
-    ctx.stroke();
+    ctx.fillText(`Month:`, 110, 1110);
+    ctx.fillText(`${data.month}`, 450, 1110);
 
     // Enhanced Warning box
     ctx.fillStyle = "#fff8e6";
-    ctx.fillRect(80, 1040, 640, 80);
+    ctx.fillRect(80, 1100, 640, 80);
     ctx.strokeStyle = "#ff9800";
     ctx.lineWidth = 4;
-    ctx.strokeRect(80, 1040, 640, 80);
+    ctx.strokeRect(80, 1100, 640, 80);
 
     ctx.fillStyle = "#e65100";
-    ctx.font = "bold 16px Arial";
+    ctx.font = "bold 18px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("⚠ Use this QR only once - Generate new QR for next payment", 400, 1070);
-    ctx.fillText("इस QR का उपयोग केवल एक बार करें - नई पेमेंट के लिए नया QR बनाएं", 400, 1095);
+    ctx.fillText("⚠ Use this QR only once - Generate new QR for next payment", 400, 1135);
+    ctx.fillText("इस QR का उपयोग केवल एक बार करें - नई पेमेंट के लिए नया QR बनाएं", 400, 1160);
 
     // Footer
     ctx.fillStyle = "#999999";
     ctx.font = "14px Arial";
-    ctx.fillText("Generated by Kala Residency Online Payment System", 400, 1130);
+    ctx.fillText("Generated by Kala Residency Online Payment System", 400, 1190);
 
     return canvas.toDataURL("image/jpeg", 0.95);
   }
