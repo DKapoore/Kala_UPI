@@ -18,21 +18,232 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: white;
+            padding: 20px 0;
         }
 
+        /* ---- NEW ANNOUNCEMENT BANNER (glassmorphism) ---- */
+        .update-banner {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 24px 28px 20px 28px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            color: #fff;
+            text-align: left;
+            animation: fadeSlide 0.8s ease-out;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.2s;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px 12px;
+            margin-bottom: 12px;
+        }
+
+        .update-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .update-title span {
+            background: rgba(255,215,0,0.2);
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffd966;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        .blink-badge {
+            background: #e63946;
+            color: white;
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(230, 57, 70, 0.7);
+            animation: blink 1.8s infinite;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .update-sub {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 18px;
+            font-weight: 300;
+        }
+
+        /* feature cards grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin: 16px 0 10px 0;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 20px;
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: transform 0.25s, background 0.25s, box-shadow 0.25s;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+        }
+
+        .feature-icon {
+            font-size: 2.1rem;
+            margin-bottom: 6px;
+        }
+
+        .feature-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+            color: #fff;
+        }
+
+        .feature-card p {
+            font-size: 0.75rem;
+            opacity: 0.85;
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        .feature-card .feature-desc {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            line-height: 1.3;
+            display: block;
+            margin-top: 4px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 6px;
+        }
+
+        /* collapsible */
+        .collapse-toggle {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 6px;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+        }
+
+        .collapse-toggle:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .extra-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .extra-details.open {
+            max-height: 800px;  /* enough for all content */
+            opacity: 1;
+            margin-top: 16px;
+        }
+
+        .extra-details-inner {
+            background: rgba(0,0,0,0.25);
+            border-radius: 20px;
+            padding: 18px 16px;
+            border-left: 2px solid #4CAF50;
+            backdrop-filter: blur(2px);
+        }
+
+        .extra-details-inner ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            justify-content: center;
+        }
+
+        .extra-details-inner li {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .extra-details-inner li::before {
+            content: "✦";
+            color: #4CAF50;
+            font-size: 1rem;
+        }
+
+        .feature-grid .feature-desc strong {
+            color: #ffd966;
+            font-weight: 600;
+        }
+
+        /* ---- EXISTING CONTAINER (unchanged) ---- */
         .container {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 40px;
             border-radius: 15px;
             max-width: 600px;
             margin: 20px;
+            width: 90%;
         }
 
         h1 {
@@ -65,9 +276,129 @@
             font-size: 14px;
             color: #cccccc;
         }
+
+        /* ---- MOBILE RESPONSIVE (feature grid stacks) ---- */
+        @media (max-width: 700px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .update-title {
+                font-size: 1.2rem;
+            }
+            .update-banner {
+                padding: 18px 16px;
+            }
+            .container {
+                padding: 28px 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .update-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .blink-badge {
+                align-self: flex-start;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+        }
+
+        /* no changes to old code, everything preserved */
     </style>
 </head>
 <body>
+    <!-- NEW ANNOUNCEMENT BANNER (floating update card) -->
+    <div class="update-banner" id="updateBanner">
+        <div class="update-header">
+            <div class="update-title">
+                🚀 Latest System Updates Available
+                <span>v2.0</span>
+            </div>
+            <div class="blink-badge">✦ NEW UPDATE</div>
+        </div>
+        <div class="update-sub">
+            New features have been added to make society management easier and more transparent.
+        </div>
+
+        <!-- 4 feature cards -->
+        <div class="feature-grid">
+            <!-- Card 1: Payment Tab -->
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h4>Payment Tab</h4>
+                <p>Select one or multiple months</p>
+                <span class="feature-desc">
+                    <strong>•</strong> Pending month <br>
+                    <strong>•</strong> Advance payment <br>
+                    <strong>•</strong> Multi-month selection
+                </span>
+            </div>
+            <!-- Card 2: Finance Tab -->
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h4>Finance Tab</h4>
+                <p>Separate finance management</p>
+                <span class="feature-desc">
+                    <strong>•</strong> Monthly history <br>
+                    <strong>•</strong> Payment records <br>
+                    <strong>•</strong> Receipts &amp; tracking
+                </span>
+            </div>
+            <!-- Card 3: Marketplace -->
+            <div class="feature-card">
+                <div class="feature-icon">🛒</div>
+                <h4>Marketplace Tab</h4>
+                <p>Buy/Sell within community</p>
+                <span class="feature-desc">
+                    <strong>•</strong> Product / Service listing <br>
+                    <strong>•</strong> WhatsApp contact <br>
+                    <strong>•</strong> 50% registration discount
+                </span>
+            </div>
+            <!-- Card 4: Community Classes -->
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h4>Community Classes</h4>
+                <p>Educational &amp; skill classes</p>
+                <span class="feature-desc">
+                    <strong>•</strong> Fitness / Hobby / Kids <br>
+                    <strong>•</strong> Special member discount <br>
+                    <strong>•</strong> Class registration
+                </span>
+            </div>
+        </div>
+
+        <!-- collapsible button + extra details -->
+        <div style="display: flex; justify-content: center; margin-top: 8px;">
+            <button class="collapse-toggle" id="toggleUpdatesBtn">▼ View Full Updates</button>
+        </div>
+
+        <div class="extra-details" id="extraDetails">
+            <div class="extra-details-inner">
+                <p style="font-weight: 500; margin-bottom: 6px;">📌 Complete feature overview</p>
+                <ul>
+                    <li><strong>Payment Tab:</strong> select pending + advance months</li>
+                    <li><strong>Finance Tab:</strong> full history &amp; receipts</li>
+                    <li><strong>Marketplace:</strong> member listings + WhatsApp</li>
+                    <li><strong>Classes:</strong> fitness, hobby, kids programs</li>
+                </ul>
+                <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 12px;">All features are live and ready to use.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXISTING CONTAINER (unchanged) -->
     <div class="container">
         <h1>Welcome to Kala Residency Payment System</h1>
         <p style="font-size: 18px; margin-bottom: 20px;">Secure and Easy Online Payments</p>
@@ -83,12 +414,25 @@
     </div>
 
     <script>
-        // Optional: You can add confirmation before redirecting
+        // --- preserve old payment button confirmation ---
         document.getElementById('paymentButton').addEventListener('click', function(e) {
             if(!confirm('You are being redirected to the payment form. Continue?')) {
                 e.preventDefault();
             }
         });
+
+        // --- NEW: collapsible toggle for "View Full Updates" ---
+        (function() {
+            const toggleBtn = document.getElementById('toggleUpdatesBtn');
+            const extraDiv = document.getElementById('extraDetails');
+            let isOpen = false;
+
+            toggleBtn.addEventListener('click', function() {
+                isOpen = !isOpen;
+                extraDiv.classList.toggle('open', isOpen);
+                toggleBtn.textContent = isOpen ? '▲ Hide Full Updates' : '▼ View Full Updates';
+            });
+        })();
     </script>
 </body>
 </html>
