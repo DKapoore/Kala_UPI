@@ -28,7 +28,7 @@
             padding: 20px 0;
         }
 
-        /* ---- NEW ANNOUNCEMENT BANNER (glassmorphism) ---- */
+        /* ---- ANNOUNCEMENT BANNER (glassmorphism) ---- */
         .update-banner {
             width: 90%;
             max-width: 800px;
@@ -236,7 +236,7 @@
             font-weight: 600;
         }
 
-        /* ---- EXISTING CONTAINER (unchanged) ---- */
+        /* ---- EXISTING CONTAINER (unchanged, but now first) ---- */
         .container {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 40px;
@@ -318,7 +318,22 @@
     </style>
 </head>
 <body>
-    <!-- NEW ANNOUNCEMENT BANNER (floating update card) -->
+    <!-- ==================== FIRST BLOCK (now at top) ==================== -->
+    <div class="container">
+        <h1>Welcome to Kala Residency Payment System</h1>
+        <p style="font-size: 18px; margin-bottom: 20px;">Secure and Easy Online Payments</p>
+        
+        <a href="https://script.google.com/macros/s/AKfycbyjPsOUD1DQ1GHF9cIQrYobtlF78P13YR4IUIKCNXgwRnV520wXqQVEBGZZ2eNOl-8/exec" class="button" id="paymentButton">
+            Open Payment Form
+        </a>
+        <!-- CHANGE THE LINK ABOVE: Replace 'https://dkapoore.github.io/Kala_UPI/' with your desired payment form URL -->
+        
+        <div class="footer">
+            <p>Kala Residency Society Management</p>
+        </div>
+    </div>
+
+    <!-- ==================== SECOND BLOCK (now at bottom) ==================== -->
     <div class="update-banner" id="updateBanner">
         <div class="update-header">
             <div class="update-title">
@@ -395,21 +410,6 @@
                 </ul>
                 <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 12px;">All features are live and ready to use.</p>
             </div>
-        </div>
-    </div>
-
-    <!-- EXISTING CONTAINER (unchanged) -->
-    <div class="container">
-        <h1>Welcome to Kala Residency Payment System</h1>
-        <p style="font-size: 18px; margin-bottom: 20px;">Secure and Easy Online Payments</p>
-        
-        <a href="https://script.google.com/macros/s/AKfycbyjPsOUD1DQ1GHF9cIQrYobtlF78P13YR4IUIKCNXgwRnV520wXqQVEBGZZ2eNOl-8/exec" class="button" id="paymentButton">
-            Open Payment Form
-        </a>
-        <!-- CHANGE THE LINK ABOVE: Replace 'https://dkapoore.github.io/Kala_UPI/' with your desired payment form URL -->
-        
-        <div class="footer">
-            <p>Kala Residency Society Management</p>
         </div>
     </div>
 
