@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ===== FORCE CACHE REFRESH ===== -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Welcome to Kala Residency Payment System</title>
     <style>
         * {
@@ -414,6 +418,9 @@
     </div>
 
     <script>
+        // --- force version check ---
+        console.log('✅ Kala Residency v2.0 - Blocks Swapped (Welcome first, Updates second)');
+        
         // --- preserve old payment button confirmation ---
         document.getElementById('paymentButton').addEventListener('click', function(e) {
             if(!confirm('You are being redirected to the payment form. Continue?')) {
