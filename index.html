@@ -8,6 +8,15 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Welcome to Kala Residency Payment System</title>
+
+    <!-- ===== PWA SETUP ===== -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="KR Payments">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3061/3061341.png">
     <style>
         * {
             margin: 0;
@@ -275,6 +284,27 @@
             background-color: #45a049;
         }
 
+        .button-outline {
+            background-color: transparent;
+            border: 2px solid #4CAF50;
+            color: #4CAF50;
+            padding: 13px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: none; /* shown via JS only when installable */
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .button-outline:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
         .footer {
             margin-top: 20px;
             font-size: 14px;
@@ -331,7 +361,10 @@
             Open Payment Form
         </a>
         <!-- CHANGE THE LINK ABOVE: Replace 'https://dkapoore.github.io/Kala_UPI/' with your desired payment form URL -->
-        
+
+        <br>
+        <button class="button-outline" id="installAppBtn">📲 Install App</button>
+
         <div class="footer">
             <p>Kala Residency Society Management</p>
         </div>
@@ -440,6 +473,36 @@
                 toggleBtn.textContent = isOpen ? '▲ Hide Full Updates' : '▼ View Full Updates';
             });
         })();
+
+        // ===== PWA: service worker + install prompt =====
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(function(err) {
+                console.error('Service Worker registration failed:', err);
+            });
+        }
+
+        let deferredPrompt;
+        const installBtn = document.getElementById('installAppBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'inline-block';
+        });
+
+        installBtn.addEventListener('click', () => {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(() => {
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            });
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installBtn.style.display = 'none';
+            console.log('PWA installed');
+        });
     </script>
 </body>
 </html>
